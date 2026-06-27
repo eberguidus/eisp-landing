@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>eISP — Sistema de gestión para proveedores de internet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 2rem 1rem; color: #1e293b; }
+    .page { max-width: 720px; margin: 0 auto; }
+
+    .header { background: #0ea5e9; border-radius: 16px; padding: 2.5rem 2rem 2rem; margin-bottom: 1.5rem; color: white; display: flex; align-items: center; gap: 1.5rem; }
+    .header-text h1 { font-size: 36px; font-weight: 500; line-height: 1; letter-spacing: -0.5px; }
+    .header-text .tagline { font-size: 14px; opacity: 0.85; margin-top: 6px; }
+    .header-text .sub { font-size: 11px; opacity: 0.65; margin-top: 4px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    .intro { background: white; border: 0.5px solid #e2e8f0; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; font-size: 14px; color: #475569; line-height: 1.7; }
+    .intro strong { color: #1e293b; font-weight: 500; }
+
+    .seccion-titulo { font-size: 11px; font-weight: 500; color: #94a3b8; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; border-left: 3px solid #0ea5e9; padding-left: 8px; }
+
+    .modulos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+    .modulo { background: white; border: 0.5px solid #e2e8f0; border-radius: 12px; padding: 1rem; }
+    .modulo-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .modulo-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .modulo-nombre { font-size: 13px; font-weight: 500; color: #1e293b; }
+    .modulo ul { list-style: none; }
+    .modulo ul li { font-size: 12px; color: #64748b; padding: 2px 0; line-height: 1.5; }
+    .modulo ul li::before { content: "·  "; color: #0ea5e9; font-weight: 700; }
+
+    .difs { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+    .dif { border-radius: 10px; padding: 1rem; text-align: center; }
+    .dif i { font-size: 24px; margin-bottom: 6px; display: block; }
+    .dif-titulo { font-size: 12px; font-weight: 500; margin-bottom: 2px; }
+    .dif-desc { font-size: 11px; line-height: 1.5; }
+
+    .garantia { border-radius: 12px; padding: 1.1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 14px; background: #EAF3DE; border: 0.5px solid #C0DD97; }
+    .garantia i { font-size: 32px; color: #3B6D11; flex-shrink: 0; }
+    .garantia-texto .titulo { font-size: 14px; font-weight: 500; color: #27500A; margin-bottom: 3px; }
+    .garantia-texto .desc { font-size: 12px; color: #3B6D11; line-height: 1.6; }
+
+    .planes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem; }
+    .plan { border-radius: 12px; padding: 1.25rem; border: 0.5px solid #e2e8f0; background: white; }
+    .plan.destacado { border: 2px solid #0ea5e9; }
+    .plan-badge { font-size: 10px; background: #E6F1FB; color: #0C447C; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
+    .plan-nombre { font-size: 16px; font-weight: 500; margin-bottom: 8px; color: #1e293b; }
+    .precio-sistema { display: flex; align-items: baseline; gap: 4px; margin-bottom: 6px; }
+    .precio-sistema .num { font-size: 28px; font-weight: 500; color: #0ea5e9; line-height: 1; }
+    .precio-sistema .label { font-size: 12px; color: #94a3b8; }
+    .precio-vpn { font-size: 12px; color: #475569; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; background: #f8fafc; border-radius: 6px; padding: 5px 8px; }
+    .precio-vpn i { color: #0ea5e9; font-size: 14px; flex-shrink: 0; }
+    .precio-instalacion { font-size: 11px; margin-bottom: 10px; display: flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 6px; background: #E6F1FB; color: #0C447C; width: fit-content; }
+    .plan-divider { border: none; border-top: 0.5px solid #e2e8f0; margin: 10px 0; }
+    .plan ul { list-style: none; }
+    .plan ul li { font-size: 12px; color: #64748b; padding: 3px 0; display: flex; align-items: flex-start; gap: 6px; }
+    .plan ul li i { color: #0ea5e9; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+    .nota-planes { font-size: 12px; color: #94a3b8; text-align: center; margin-bottom: 1.5rem; line-height: 1.6; }
+
+    .footer { background: #0ea5e9; border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .footer-demo { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); border-radius: 10px; padding: 0.9rem 1.25rem; display: flex; align-items: center; gap: 12px; }
+    .footer-demo i { font-size: 22px; color: white; flex-shrink: 0; }
+    .footer-demo-text .titulo { font-size: 13px; font-weight: 500; color: white; margin-bottom: 2px; }
+    .footer-demo-text .desc { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-contacto { color: white; }
+    .footer-contacto .label { font-size: 11px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .footer-contacto .valor { font-size: 18px; font-weight: 500; }
+    .footer-contacto .desc { font-size: 12px; opacity: 0.75; margin-top: 2px; }
+    .footer-wa { background: white; color: #0ea5e9; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 6px; white-space: nowrap; text-decoration: none; }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .page { max-width: 100%; }
+      @page { margin: 1.5cm; size: A4; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" width="72" height="72">
+      <rect width="64" height="64" rx="14" fill="white" fill-opacity="0.15"/>
+      <path d="M19 27 Q32 15 45 27" stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <path d="M12 21 Q32 6 52 21" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.6"/>
+      <line x1="32" y1="32" x2="32" y2="52" stroke="white" stroke-width="4" stroke-linecap="round"/>
+      <line x1="25" y1="39" x2="39" y2="39" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      <line x1="22" y1="46" x2="42" y2="46" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      <line x1="32" y1="52" x2="22" y2="58" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="32" y1="52" x2="42" y2="58" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="32" cy="32" r="4" fill="white"/>
+    </svg>
+    <div class="header-text">
+      <h1>eISP</h1>
+      <div class="tagline">Sistema completo de gestión para proveedores de internet</div>
+      <div class="sub">Cobros · MikroTik · WhatsApp · Soporte · Contabilidad · Inventario · Multi-usuario</div>
+    </div>
+  </div>
+
+  <div class="intro">
+    <strong>eISP</strong> es un sistema de gestión diseñado específicamente para <strong>micro y medianos ISP</strong>. Desarrollado por alguien que operó su propio ISP, integra en una sola plataforma todo lo que necesitas: control de clientes, cobros, integración directa con MikroTik, notificaciones por WhatsApp, soporte técnico, inventario de materiales y contabilidad básica. <strong>Multi-usuario con roles diferenciados — admin, técnico y socio.</strong>
+  </div>
+
+  <div class="seccion-titulo">Módulos incluidos</div>
+  <div class="modulos">
+
+    <div class="modulo">
+      <div class="modulo-header">
+        <div class="modulo-icon" style="background:#E6F1FB;"><i class="ti ti-users" style="font-size:18px;color:#185FA5;"></i></div>
+        <div class="modulo-nombre">Clientes</div>
+      </div>
+      <ul>
+        <li>Ficha completa con estado y plan</li>
+        <li>IP estática y PPPoE</li>
+        <li>GPS y mapa de ubicación</li>
+        <li>Cuenta IPTV integrada</li>
+        <li>Historial de suspensiones</li>
+      </ul>
+    </div>
+
+    <div class="modulo">
+      <div class="modulo-header">
+        <div class="modulo-icon" style="background:#EAF3DE;"><i class="ti ti-cash" style="font-size:18px;color:#3B6D11;"></i></div>
+        <div class="modulo-nombre">Cobros y mora</div>
+      </div>
+      <ul>
+        <li>Facturación mensual automática</li>
+        <li>Pago individual y múltiple</li>
+        <li>Pre-aviso y corte por mora</li>
+        <li>Comprobante por WhatsApp</li>
+        <li>Control de depósitos bancarios</li>
+      </ul>
+    </div>
+
+    <div class="modulo">
+      <div class="modulo-header">
+        <div class="modulo-icon" style="background:#FAECE7;"><i class="ti ti-router" style="font-size:18px;color:#993C1D;"></i></div>
+        <div class="modulo-nombre">MikroTik</div>
+      </div>
+      <ul>
+        <li>Suspensión y activación automática</li>
+        <li>Crear PPPoE secrets y Simple Queues</li>
+        <li>Monitor en tiempo real (CPU, RAM)</li>
+        <li>Histograma de tráfico por puerto</li>
+        <li>Backup y restore remoto vía SSH</li>
+      </ul>
+    </div>
+
+    <div class="modulo">
+      <div class="modulo-header">
+        <div class="modulo-icon" style="background:#E1F5EE;"><i class="ti ti-brand-whatsapp" style="font-size:18px;color:#0F6E56;"></i></div>
+        <div class="modulo-nombre">WhatsApp</div>
+      </div>
+      <ul>
+        <li>Notificaciones automáticas de cobro</li>
+        <li>Avisos de mora y corte</li>
+        <li>Bot con menú de consultas</li>
+        <li>Envío de contraseña WiFi</li>
+        <li>Alertas de routers offline</li>
+      </ul>
+    </div>
+
+    <div class="modulo">
+      <div class="modulo-header">
+        <div class="modulo-icon" style="background:#FAEEDA;"><i class="ti ti-headset" style="font-size:18px;color:#854F0B;"></i></div>
+        <div class="modulo-nombre">Soporte técnico</div>
+      </div>
+      <ul>
+        <li>Tickets con prioridad y estados</li>
+        <li>Historial de atención por cliente</li>
+        <li>App para técnicos en campo (PEX)</li>
+        <li>Caja chica del técnico</li>
+        <li>Mapa KML para Google Earth</li>
+      </ul>
+    </div>
+
+    <div class="modulo">
+      <div class="modulo-header">
+        <div class="modulo-icon" style="background:#FBEAF0;"><i class="ti ti-packages" style="font-size:18px;color:#993556;"></i></div>
+        <div class="modulo-nombre">Inventario</div>
+      </div>
+      <ul>
+        <li>Productos y stock en tiempo real</li>
+        <li>Entradas y salidas con motivo</li>
+        <li>Materiales usados por ticket</li>
+        <li>Alertas de stock mínimo</li>
+        <li>Reportes de movimientos</li>
+      </ul>
+    </div>
+
+    <div class="modulo">
+      <div class="modulo-header">
+        <div class="modulo-icon" style="background:#EEEDFE;"><i class="ti ti-chart-bar" style="font-size:18px;color:#534AB7;"></i></div>
+        <div class="modulo-nombre">Finanzas y reportes</div>
+      </div>
+      <ul>
+        <li>Libro diario de doble partida</li>
+        <li>Estado de resultados mensual</li>
+        <li>Reportes exportables Excel y PDF</li>
+        <li>Control de gastos personales</li>
+        <li>Panel financiero con KPIs</li>
+      </ul>
+    </div>
+
+    <div class="modulo">
+      <div class="modulo-header">
+        <div class="modulo-icon" style="background:#F1EFE8;"><i class="ti ti-users-group" style="font-size:18px;color:#5F5E5A;"></i></div>
+        <div class="modulo-nombre">Multi-usuario</div>
+      </div>
+      <ul>
+        <li>Roles: admin, técnico y socio</li>
+        <li>Acceso diferenciado por módulo</li>
+        <li>Registro de actividad por usuario</li>
+        <li>Gestión de empleados y cargos</li>
+        <li>Zonas y líneas de cobertura</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="seccion-titulo">¿Por qué eISP?</div>
+  <div class="difs">
+    <div class="dif" style="background:#E6F1FB;">
+      <i class="ti ti-bolt" style="color:#185FA5;"></i>
+      <div class="dif-titulo" style="color:#0C447C;">Listo para usar</div>
+      <div class="dif-desc" style="color:#185FA5;">Sin configuraciones complejas. En horas ya estás operando.</div>
+    </div>
+    <div class="dif" style="background:#E1F5EE;">
+      <i class="ti ti-device-mobile" style="color:#0F6E56;"></i>
+      <div class="dif-titulo" style="color:#085041;">100% responsive</div>
+      <div class="dif-desc" style="color:#0F6E56;">Funciona desde celular, tablet o PC sin instalar nada.</div>
+    </div>
+    <div class="dif" style="background:#FAEEDA;">
+      <i class="ti ti-shield-lock" style="color:#854F0B;"></i>
+      <div class="dif-titulo" style="color:#633806;">Datos seguros</div>
+      <div class="dif-desc" style="color:#854F0B;">Backups diarios automáticos. Acceso solo con usuario y contraseña.</div>
+    </div>
+    <div class="dif" style="background:#EEEDFE;">
+      <i class="ti ti-headset" style="color:#534AB7;"></i>
+      <div class="dif-titulo" style="color:#3C3489;">Soporte directo</div>
+      <div class="dif-desc" style="color:#534AB7;">Atención personalizada por WhatsApp. Sin bots, sin esperas.</div>
+    </div>
+    <div class="dif" style="background:#FBEAF0;">
+      <i class="ti ti-refresh" style="color:#993556;"></i>
+      <div class="dif-titulo" style="color:#72243E;">Actualizaciones</div>
+      <div class="dif-desc" style="color:#993556;">Mejoras continuas incluidas en el plan mensual.</div>
+    </div>
+  </div>
+
+  <!-- GARANTÍA -->
+  <div class="garantia">
+    <i class="ti ti-rosette-discount-check"></i>
+    <div class="garantia-texto">
+      <div class="titulo">Garantía de devolución — 14 días</div>
+      <div class="desc">Si dentro de los primeros 14 días el sistema no cumple tus expectativas, te devolvemos toda tu inversión sin preguntas. 100% confiable.</div>
+    </div>
+  </div>
+
+  <div class="seccion-titulo">Planes y precios</div>
+  <div class="planes">
+    <div class="plan">
+      <div class="plan-badge">Modalidad Local</div>
+      <div class="plan-nombre">En tu servidor</div>
+      <div class="precio-sistema">
+        <span class="num">$10</span>
+        <span class="label">/ mes</span>
+      </div>
+      <div class="precio-vpn"><i class="ti ti-check"></i> Hasta 10 VPN MikroTik incluidas</div>
+      <div class="precio-instalacion"><i class="ti ti-tool" style="font-size:12px;"></i> Instalación y configuración: $50 único</div>
+      <hr class="plan-divider"/>
+      <ul>
+        <li><i class="ti ti-check"></i>Sistema en tu PC o servidor</li>
+        <li><i class="ti ti-check"></i>Acceso desde cualquier dispositivo</li>
+        <li><i class="ti ti-check"></i>Actualizaciones incluidas</li>
+        <li><i class="ti ti-check"></i>Soporte por WhatsApp</li>
+      </ul>
+    </div>
+    <div class="plan destacado">
+      <div class="plan-badge">Modalidad Online</div>
+      <div class="plan-nombre">En la nube</div>
+      <div class="precio-sistema">
+        <span class="num">$20</span>
+        <span class="label">/ mes</span>
+      </div>
+      <div class="precio-vpn"><i class="ti ti-check"></i> Hasta 10 VPN MikroTik incluidas</div>
+      <div class="precio-instalacion"><i class="ti ti-tool" style="font-size:12px;"></i> Instalación y configuración: $50 único</div>
+      <hr class="plan-divider"/>
+      <ul>
+        <li><i class="ti ti-check"></i>Servidor dedicado en la nube</li>
+        <li><i class="ti ti-check"></i>Backups diarios garantizados</li>
+        <li><i class="ti ti-check"></i>Sin preocuparte por hardware</li>
+        <li><i class="ti ti-check"></i>Soporte prioritario</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="nota-planes">
+    ¿Más de 10 routers MikroTik? Consultanos — tenemos tarifas especiales para redes más grandes.
+  </div>
+
+  <div class="footer">
+    <div class="footer-demo">
+      <i class="ti ti-player-play"></i>
+      <div class="footer-demo-text">
+        <div class="titulo">Accede a nuestra demo en vivo</div>
+        <div class="desc">Datos prellenados, sin registro y sin perder tiempo en configuraciones iniciales — solo escríbenos y te enviamos el acceso.</div>
+      </div>
+    </div>
+    <div class="footer-top">
+      <div class="footer-contacto">
+        <div class="label">Contacto</div>
+        <div class="valor">+591 77774626</div>
+        <div class="desc">Consultas, demos y contratación por WhatsApp</div>
+      </div>
+      <a class="footer-wa" href="https://wa.me/59177774626">
+        <i class="ti ti-brand-whatsapp" style="font-size:18px;"></i>
+        Escribir ahora
+      </a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
