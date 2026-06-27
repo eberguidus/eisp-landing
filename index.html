@@ -7,81 +7,128 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"/>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 2rem 1rem; color: #1e293b; }
-    .page { max-width: 720px; margin: 0 auto; }
 
-    .header { background: #0ea5e9; border-radius: 16px; padding: 2.5rem 2rem 2rem; margin-bottom: 1.5rem; color: white; display: flex; align-items: center; gap: 1.5rem; }
-    .header-text h1 { font-size: 36px; font-weight: 500; line-height: 1; letter-spacing: -0.5px; }
-    .header-text .tagline { font-size: 14px; opacity: 0.85; margin-top: 6px; }
-    .header-text .sub { font-size: 11px; opacity: 0.65; margin-top: 4px; letter-spacing: 0.06em; text-transform: uppercase; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: #e2e8f0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0a0f1e 0%, #0d1f3c 40%, #0a1628 70%, #050a14 100%);
+      position: relative;
+      overflow-x: hidden;
+    }
 
-    .intro { background: white; border: 0.5px solid #e2e8f0; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; font-size: 14px; color: #475569; line-height: 1.7; }
-    .intro strong { color: #1e293b; font-weight: 500; }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(14,165,233,0.12) 1px, transparent 1px);
+      background-size: 36px 36px;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-    .seccion-titulo { font-size: 11px; font-weight: 500; color: #94a3b8; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; border-left: 3px solid #0ea5e9; padding-left: 8px; }
+    .page { max-width: 740px; margin: 0 auto; padding: 2.5rem 1.25rem; position: relative; z-index: 1; }
 
-    .modulos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
-    .modulo { background: white; border: 0.5px solid #e2e8f0; border-radius: 12px; padding: 1rem; }
-    .modulo-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-    .modulo-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .modulo-nombre { font-size: 13px; font-weight: 500; color: #1e293b; }
+    .orb { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; }
+    .orb-1 { width: 420px; height: 420px; background: rgba(14,165,233,0.18); top: -120px; right: -100px; }
+    .orb-2 { width: 320px; height: 320px; background: rgba(99,102,241,0.14); bottom: 200px; left: -120px; }
+    .orb-3 { width: 240px; height: 240px; background: rgba(34,197,94,0.08); top: 50%; right: -60px; }
+
+    .header {
+      border-radius: 20px; padding: 2.5rem 2rem 2rem; margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 1.75rem;
+      background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+      box-shadow: 0 8px 40px rgba(14,165,233,0.35), 0 2px 8px rgba(0,0,0,0.4);
+      position: relative; overflow: hidden;
+    }
+    .header::after { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+    .header::before { content: ''; position: absolute; bottom: -60px; right: 80px; width: 280px; height: 280px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+    .header-text h1 { font-size: 40px; font-weight: 600; line-height: 1; letter-spacing: -1px; color: white; }
+    .header-text .tagline { font-size: 14px; opacity: 0.88; margin-top: 7px; color: white; }
+    .header-text .sub { font-size: 10.5px; opacity: 0.6; margin-top: 5px; letter-spacing: 0.07em; text-transform: uppercase; color: white; }
+
+    .intro { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1.75rem; font-size: 14px; color: #94a3b8; line-height: 1.75; }
+    .intro strong { color: #e2e8f0; font-weight: 500; }
+
+    .seccion-titulo { font-size: 10.5px; font-weight: 600; color: #0ea5e9; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 8px; }
+    .seccion-titulo::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, rgba(14,165,233,0.4), transparent); }
+
+    .modulos { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-bottom: 1.75rem; }
+    .modulo { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); backdrop-filter: blur(8px); border-radius: 14px; padding: 1.1rem; transition: border-color 0.2s, background 0.2s; }
+    .modulo:hover { background: rgba(255,255,255,0.07); border-color: rgba(14,165,233,0.3); }
+    .modulo-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .modulo-icon { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .modulo-nombre { font-size: 13px; font-weight: 500; color: #e2e8f0; }
     .modulo ul { list-style: none; }
-    .modulo ul li { font-size: 12px; color: #64748b; padding: 2px 0; line-height: 1.5; }
+    .modulo ul li { font-size: 12px; color: #64748b; padding: 2px 0; line-height: 1.6; }
     .modulo ul li::before { content: "·  "; color: #0ea5e9; font-weight: 700; }
 
-    .difs { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
-    .dif { border-radius: 10px; padding: 1rem; text-align: center; }
-    .dif i { font-size: 24px; margin-bottom: 6px; display: block; }
-    .dif-titulo { font-size: 12px; font-weight: 500; margin-bottom: 2px; }
-    .dif-desc { font-size: 11px; line-height: 1.5; }
+    .difs { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1.75rem; }
+    .dif { border-radius: 12px; padding: 1.1rem; text-align: center; border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); }
+    .dif i { font-size: 26px; margin-bottom: 7px; display: block; }
+    .dif-titulo { font-size: 12px; font-weight: 500; margin-bottom: 3px; color: #e2e8f0; }
+    .dif-desc { font-size: 11px; line-height: 1.55; color: #64748b; }
 
-    .garantia { border-radius: 12px; padding: 1.1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 14px; background: #EAF3DE; border: 0.5px solid #C0DD97; }
-    .garantia i { font-size: 32px; color: #3B6D11; flex-shrink: 0; }
-    .garantia-texto .titulo { font-size: 14px; font-weight: 500; color: #27500A; margin-bottom: 3px; }
-    .garantia-texto .desc { font-size: 12px; color: #3B6D11; line-height: 1.6; }
+    .garantia { border-radius: 14px; padding: 1.2rem 1.4rem; margin-bottom: 1.75rem; display: flex; align-items: center; gap: 16px; background: linear-gradient(135deg, rgba(34,197,94,0.12) 0%, rgba(21,128,61,0.08) 100%); border: 1px solid rgba(34,197,94,0.25); }
+    .garantia i { font-size: 36px; color: #22c55e; flex-shrink: 0; }
+    .garantia-texto .titulo { font-size: 14px; font-weight: 500; color: #86efac; margin-bottom: 4px; }
+    .garantia-texto .desc { font-size: 12px; color: #4ade80; opacity: 0.85; line-height: 1.65; }
 
-    .planes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem; }
-    .plan { border-radius: 12px; padding: 1.25rem; border: 0.5px solid #e2e8f0; background: white; }
-    .plan.destacado { border: 2px solid #0ea5e9; }
-    .plan-badge { font-size: 10px; background: #E6F1FB; color: #0C447C; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
-    .plan-nombre { font-size: 16px; font-weight: 500; margin-bottom: 8px; color: #1e293b; }
-    .precio-sistema { display: flex; align-items: baseline; gap: 4px; margin-bottom: 6px; }
-    .precio-sistema .num { font-size: 28px; font-weight: 500; color: #0ea5e9; line-height: 1; }
-    .precio-sistema .label { font-size: 12px; color: #94a3b8; }
-    .precio-vpn { font-size: 12px; color: #475569; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; background: #f8fafc; border-radius: 6px; padding: 5px 8px; }
+    .planes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 1rem; }
+    .plan { border-radius: 16px; padding: 1.4rem; border: 1px solid rgba(255,255,255,0.09); background: rgba(255,255,255,0.04); backdrop-filter: blur(8px); }
+    .plan.destacado { border: 1.5px solid rgba(14,165,233,0.5); background: rgba(14,165,233,0.07); box-shadow: 0 0 30px rgba(14,165,233,0.12); }
+    .plan-badge { font-size: 10px; background: rgba(14,165,233,0.2); color: #7dd3fc; border: 1px solid rgba(14,165,233,0.3); padding: 2px 10px; border-radius: 20px; display: inline-block; margin-bottom: 10px; }
+    .plan-nombre { font-size: 16px; font-weight: 500; margin-bottom: 10px; color: #e2e8f0; }
+    .precio-sistema { display: flex; align-items: baseline; gap: 4px; margin-bottom: 8px; }
+    .precio-sistema .num { font-size: 32px; font-weight: 600; color: #38bdf8; line-height: 1; }
+    .precio-sistema .label { font-size: 13px; color: #475569; }
+    .precio-vpn { font-size: 12px; color: #94a3b8; margin-bottom: 8px; display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.05); border-radius: 7px; padding: 5px 10px; border: 1px solid rgba(255,255,255,0.07); }
     .precio-vpn i { color: #0ea5e9; font-size: 14px; flex-shrink: 0; }
-    .precio-instalacion { font-size: 11px; margin-bottom: 10px; display: flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 6px; background: #E6F1FB; color: #0C447C; width: fit-content; }
-    .plan-divider { border: none; border-top: 0.5px solid #e2e8f0; margin: 10px 0; }
+    .precio-instalacion { font-size: 11px; margin-bottom: 12px; display: flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 6px; background: rgba(14,165,233,0.12); color: #7dd3fc; border: 1px solid rgba(14,165,233,0.2); width: fit-content; }
+    .plan-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 12px 0; }
     .plan ul { list-style: none; }
-    .plan ul li { font-size: 12px; color: #64748b; padding: 3px 0; display: flex; align-items: flex-start; gap: 6px; }
+    .plan ul li { font-size: 12px; color: #64748b; padding: 3.5px 0; display: flex; align-items: flex-start; gap: 7px; }
     .plan ul li i { color: #0ea5e9; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
 
-    .nota-planes { font-size: 12px; color: #94a3b8; text-align: center; margin-bottom: 1.5rem; line-height: 1.6; }
+    .nota-planes { font-size: 12px; color: #334155; text-align: center; margin-bottom: 1.75rem; line-height: 1.6; }
 
-    .footer { background: #0ea5e9; border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
-    .footer-demo { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); border-radius: 10px; padding: 0.9rem 1.25rem; display: flex; align-items: center; gap: 12px; }
-    .footer-demo i { font-size: 22px; color: white; flex-shrink: 0; }
-    .footer-demo-text .titulo { font-size: 13px; font-weight: 500; color: white; margin-bottom: 2px; }
-    .footer-demo-text .desc { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.5; }
-    .footer-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer { background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%); border-radius: 16px; padding: 1.4rem 1.6rem; display: flex; flex-direction: column; gap: 1rem; box-shadow: 0 8px 40px rgba(14,165,233,0.3); position: relative; overflow: hidden; }
+    .footer::after { content: ''; position: absolute; top: -50px; right: -50px; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.07); pointer-events: none; }
+    .footer-demo { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 14px; }
+    .footer-demo i { font-size: 24px; color: white; flex-shrink: 0; }
+    .footer-demo-text .titulo { font-size: 13px; font-weight: 500; color: white; margin-bottom: 3px; }
+    .footer-demo-text .desc { font-size: 11px; color: rgba(255,255,255,0.72); line-height: 1.55; }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; position: relative; z-index: 1; }
     .footer-contacto { color: white; }
-    .footer-contacto .label { font-size: 11px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-    .footer-contacto .valor { font-size: 18px; font-weight: 500; }
-    .footer-contacto .desc { font-size: 12px; opacity: 0.75; margin-top: 2px; }
-    .footer-wa { background: white; color: #0ea5e9; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 6px; white-space: nowrap; text-decoration: none; }
+    .footer-contacto .label { font-size: 10.5px; opacity: 0.65; text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 4px; }
+    .footer-contacto .valor { font-size: 20px; font-weight: 600; }
+    .footer-contacto .desc { font-size: 12px; opacity: 0.72; margin-top: 2px; }
+    .footer-wa { background: white; color: #0369a1; border-radius: 10px; padding: 10px 20px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 7px; white-space: nowrap; text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
 
+    .deco-network { width: 100%; margin-bottom: 1.75rem; opacity: 0.7; }
+
+    @media (max-width: 520px) {
+      .planes { grid-template-columns: 1fr; }
+      .header { flex-direction: column; text-align: center; }
+    }
     @media print {
-      body { background: white; padding: 0; }
-      .page { max-width: 100%; }
+      body { background: white; color: #1e293b; }
+      body::before, .orb { display: none; }
+      .modulo, .intro, .plan, .dif { background: #f8fafc !important; border-color: #e2e8f0 !important; }
       @page { margin: 1.5cm; size: A4; }
     }
   </style>
 </head>
 <body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
 <div class="page">
 
   <div class="header">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" width="72" height="72">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" width="80" height="80" style="flex-shrink:0;position:relative;z-index:1;">
       <rect width="64" height="64" rx="14" fill="white" fill-opacity="0.15"/>
       <path d="M19 27 Q32 15 45 27" stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
       <path d="M12 21 Q32 6 52 21" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.6"/>
@@ -92,12 +139,42 @@
       <line x1="32" y1="52" x2="42" y2="58" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
       <circle cx="32" cy="32" r="4" fill="white"/>
     </svg>
-    <div class="header-text">
+    <div class="header-text" style="position:relative;z-index:1;">
       <h1>eISP</h1>
       <div class="tagline">Sistema completo de gestión para proveedores de internet</div>
       <div class="sub">Cobros · MikroTik · WhatsApp · Soporte · Contabilidad · Inventario · Multi-usuario</div>
     </div>
   </div>
+
+  <!-- Ilustración decorativa: red de nodos -->
+  <svg class="deco-network" viewBox="0 0 700 90" xmlns="http://www.w3.org/2000/svg">
+    <line x1="60"  y1="45" x2="180" y2="20" stroke="#0ea5e9" stroke-width="1" opacity="0.3"/>
+    <line x1="60"  y1="45" x2="180" y2="70" stroke="#0ea5e9" stroke-width="1" opacity="0.3"/>
+    <line x1="180" y1="20" x2="320" y2="45" stroke="#0ea5e9" stroke-width="1" opacity="0.3"/>
+    <line x1="180" y1="70" x2="320" y2="45" stroke="#0ea5e9" stroke-width="1" opacity="0.3"/>
+    <line x1="320" y1="45" x2="460" y2="20" stroke="#0ea5e9" stroke-width="1" opacity="0.3"/>
+    <line x1="320" y1="45" x2="460" y2="70" stroke="#0ea5e9" stroke-width="1" opacity="0.3"/>
+    <line x1="460" y1="20" x2="580" y2="45" stroke="#0ea5e9" stroke-width="1" opacity="0.3"/>
+    <line x1="460" y1="70" x2="580" y2="45" stroke="#0ea5e9" stroke-width="1" opacity="0.3"/>
+    <line x1="580" y1="45" x2="650" y2="25" stroke="#0ea5e9" stroke-width="1" opacity="0.2"/>
+    <line x1="580" y1="45" x2="650" y2="65" stroke="#0ea5e9" stroke-width="1" opacity="0.2"/>
+    <circle cx="60"  cy="45" r="7"  fill="#0ea5e9" opacity="0.9"/>
+    <circle cx="320" cy="45" r="10" fill="#0ea5e9" opacity="1"/>
+    <circle cx="580" cy="45" r="7"  fill="#0ea5e9" opacity="0.9"/>
+    <circle cx="180" cy="20" r="5"  fill="#38bdf8" opacity="0.7"/>
+    <circle cx="180" cy="70" r="5"  fill="#38bdf8" opacity="0.7"/>
+    <circle cx="460" cy="20" r="5"  fill="#38bdf8" opacity="0.7"/>
+    <circle cx="460" cy="70" r="5"  fill="#38bdf8" opacity="0.7"/>
+    <circle cx="650" cy="25" r="3"  fill="#7dd3fc" opacity="0.5"/>
+    <circle cx="650" cy="65" r="3"  fill="#7dd3fc" opacity="0.5"/>
+    <circle cx="320" cy="45" r="10" fill="none" stroke="#0ea5e9" stroke-width="2" opacity="0.5">
+      <animate attributeName="r" from="10" to="28" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <text x="60"  y="62" text-anchor="middle" font-size="8" fill="#38bdf8" opacity="0.6" font-family="monospace">Router</text>
+    <text x="320" y="65" text-anchor="middle" font-size="9" fill="#38bdf8" opacity="0.9" font-family="monospace" font-weight="bold">eISP</text>
+    <text x="580" y="62" text-anchor="middle" font-size="8" fill="#38bdf8" opacity="0.6" font-family="monospace">Clientes</text>
+  </svg>
 
   <div class="intro">
     <strong>eISP</strong> es un sistema de gestión diseñado específicamente para <strong>micro y medianos ISP</strong>. Desarrollado por alguien que operó su propio ISP, integra en una sola plataforma todo lo que necesitas: control de clientes, cobros, integración directa con MikroTik, notificaciones por WhatsApp, soporte técnico, inventario de materiales y contabilidad básica. <strong>Multi-usuario con roles diferenciados — admin, técnico y socio.</strong>
@@ -105,151 +182,73 @@
 
   <div class="seccion-titulo">Módulos incluidos</div>
   <div class="modulos">
-
     <div class="modulo">
       <div class="modulo-header">
-        <div class="modulo-icon" style="background:#E6F1FB;"><i class="ti ti-users" style="font-size:18px;color:#185FA5;"></i></div>
+        <div class="modulo-icon" style="background:rgba(24,95,165,0.2);"><i class="ti ti-users" style="font-size:18px;color:#60a5fa;"></i></div>
         <div class="modulo-nombre">Clientes</div>
       </div>
-      <ul>
-        <li>Ficha completa con estado y plan</li>
-        <li>IP estática y PPPoE</li>
-        <li>GPS y mapa de ubicación</li>
-        <li>Cuenta IPTV integrada</li>
-        <li>Historial de suspensiones</li>
-      </ul>
+      <ul><li>Ficha completa con estado y plan</li><li>IP estática y PPPoE</li><li>GPS y mapa de ubicación</li><li>Cuenta IPTV integrada</li><li>Historial de suspensiones</li></ul>
     </div>
-
     <div class="modulo">
       <div class="modulo-header">
-        <div class="modulo-icon" style="background:#EAF3DE;"><i class="ti ti-cash" style="font-size:18px;color:#3B6D11;"></i></div>
+        <div class="modulo-icon" style="background:rgba(59,109,17,0.2);"><i class="ti ti-cash" style="font-size:18px;color:#86efac;"></i></div>
         <div class="modulo-nombre">Cobros y mora</div>
       </div>
-      <ul>
-        <li>Facturación mensual automática</li>
-        <li>Pago individual y múltiple</li>
-        <li>Pre-aviso y corte por mora</li>
-        <li>Comprobante por WhatsApp</li>
-        <li>Control de depósitos bancarios</li>
-      </ul>
+      <ul><li>Facturación mensual automática</li><li>Pago individual y múltiple</li><li>Pre-aviso y corte por mora</li><li>Comprobante por WhatsApp</li><li>Control de depósitos bancarios</li></ul>
     </div>
-
     <div class="modulo">
       <div class="modulo-header">
-        <div class="modulo-icon" style="background:#FAECE7;"><i class="ti ti-router" style="font-size:18px;color:#993C1D;"></i></div>
+        <div class="modulo-icon" style="background:rgba(153,60,29,0.2);"><i class="ti ti-router" style="font-size:18px;color:#fca5a5;"></i></div>
         <div class="modulo-nombre">MikroTik</div>
       </div>
-      <ul>
-        <li>Suspensión y activación automática</li>
-        <li>Crear PPPoE secrets y Simple Queues</li>
-        <li>Monitor en tiempo real (CPU, RAM)</li>
-        <li>Histograma de tráfico por puerto</li>
-        <li>Backup y restore remoto vía SSH</li>
-      </ul>
+      <ul><li>Suspensión y activación automática</li><li>Crear PPPoE secrets y Simple Queues</li><li>Monitor en tiempo real (CPU, RAM)</li><li>Histograma de tráfico por puerto</li><li>Backup y restore remoto vía SSH</li></ul>
     </div>
-
     <div class="modulo">
       <div class="modulo-header">
-        <div class="modulo-icon" style="background:#E1F5EE;"><i class="ti ti-brand-whatsapp" style="font-size:18px;color:#0F6E56;"></i></div>
+        <div class="modulo-icon" style="background:rgba(15,110,86,0.2);"><i class="ti ti-brand-whatsapp" style="font-size:18px;color:#4ade80;"></i></div>
         <div class="modulo-nombre">WhatsApp</div>
       </div>
-      <ul>
-        <li>Notificaciones automáticas de cobro</li>
-        <li>Avisos de mora y corte</li>
-        <li>Bot con menú de consultas</li>
-        <li>Envío de contraseña WiFi</li>
-        <li>Alertas de routers offline</li>
-      </ul>
+      <ul><li>Notificaciones automáticas de cobro</li><li>Avisos de mora y corte</li><li>Bot con menú de consultas</li><li>Envío de contraseña WiFi</li><li>Alertas de routers offline</li></ul>
     </div>
-
     <div class="modulo">
       <div class="modulo-header">
-        <div class="modulo-icon" style="background:#FAEEDA;"><i class="ti ti-headset" style="font-size:18px;color:#854F0B;"></i></div>
+        <div class="modulo-icon" style="background:rgba(133,79,11,0.2);"><i class="ti ti-headset" style="font-size:18px;color:#fcd34d;"></i></div>
         <div class="modulo-nombre">Soporte técnico</div>
       </div>
-      <ul>
-        <li>Tickets con prioridad y estados</li>
-        <li>Historial de atención por cliente</li>
-        <li>App para técnicos en campo (PEX)</li>
-        <li>Caja chica del técnico</li>
-        <li>Mapa KML para Google Earth</li>
-      </ul>
+      <ul><li>Tickets con prioridad y estados</li><li>Historial de atención por cliente</li><li>App para técnicos en campo (PEX)</li><li>Caja chica del técnico</li><li>Mapa KML para Google Earth</li></ul>
     </div>
-
     <div class="modulo">
       <div class="modulo-header">
-        <div class="modulo-icon" style="background:#FBEAF0;"><i class="ti ti-packages" style="font-size:18px;color:#993556;"></i></div>
+        <div class="modulo-icon" style="background:rgba(153,53,86,0.2);"><i class="ti ti-packages" style="font-size:18px;color:#f9a8d4;"></i></div>
         <div class="modulo-nombre">Inventario</div>
       </div>
-      <ul>
-        <li>Productos y stock en tiempo real</li>
-        <li>Entradas y salidas con motivo</li>
-        <li>Materiales usados por ticket</li>
-        <li>Alertas de stock mínimo</li>
-        <li>Reportes de movimientos</li>
-      </ul>
+      <ul><li>Productos y stock en tiempo real</li><li>Entradas y salidas con motivo</li><li>Materiales usados por ticket</li><li>Alertas de stock mínimo</li><li>Reportes de movimientos</li></ul>
     </div>
-
     <div class="modulo">
       <div class="modulo-header">
-        <div class="modulo-icon" style="background:#EEEDFE;"><i class="ti ti-chart-bar" style="font-size:18px;color:#534AB7;"></i></div>
+        <div class="modulo-icon" style="background:rgba(83,74,183,0.2);"><i class="ti ti-chart-bar" style="font-size:18px;color:#a5b4fc;"></i></div>
         <div class="modulo-nombre">Finanzas y reportes</div>
       </div>
-      <ul>
-        <li>Libro diario de doble partida</li>
-        <li>Estado de resultados mensual</li>
-        <li>Reportes exportables Excel y PDF</li>
-        <li>Control de gastos personales</li>
-        <li>Panel financiero con KPIs</li>
-      </ul>
+      <ul><li>Libro diario de doble partida</li><li>Estado de resultados mensual</li><li>Reportes exportables Excel y PDF</li><li>Control de gastos personales</li><li>Panel financiero con KPIs</li></ul>
     </div>
-
     <div class="modulo">
       <div class="modulo-header">
-        <div class="modulo-icon" style="background:#F1EFE8;"><i class="ti ti-users-group" style="font-size:18px;color:#5F5E5A;"></i></div>
+        <div class="modulo-icon" style="background:rgba(95,94,90,0.2);"><i class="ti ti-users-group" style="font-size:18px;color:#cbd5e1;"></i></div>
         <div class="modulo-nombre">Multi-usuario</div>
       </div>
-      <ul>
-        <li>Roles: admin, técnico y socio</li>
-        <li>Acceso diferenciado por módulo</li>
-        <li>Registro de actividad por usuario</li>
-        <li>Gestión de empleados y cargos</li>
-        <li>Zonas y líneas de cobertura</li>
-      </ul>
+      <ul><li>Roles: admin, técnico y socio</li><li>Acceso diferenciado por módulo</li><li>Registro de actividad por usuario</li><li>Gestión de empleados y cargos</li><li>Zonas y líneas de cobertura</li></ul>
     </div>
-
   </div>
 
   <div class="seccion-titulo">¿Por qué eISP?</div>
   <div class="difs">
-    <div class="dif" style="background:#E6F1FB;">
-      <i class="ti ti-bolt" style="color:#185FA5;"></i>
-      <div class="dif-titulo" style="color:#0C447C;">Listo para usar</div>
-      <div class="dif-desc" style="color:#185FA5;">Sin configuraciones complejas. En horas ya estás operando.</div>
-    </div>
-    <div class="dif" style="background:#E1F5EE;">
-      <i class="ti ti-device-mobile" style="color:#0F6E56;"></i>
-      <div class="dif-titulo" style="color:#085041;">100% responsive</div>
-      <div class="dif-desc" style="color:#0F6E56;">Funciona desde celular, tablet o PC sin instalar nada.</div>
-    </div>
-    <div class="dif" style="background:#FAEEDA;">
-      <i class="ti ti-shield-lock" style="color:#854F0B;"></i>
-      <div class="dif-titulo" style="color:#633806;">Datos seguros</div>
-      <div class="dif-desc" style="color:#854F0B;">Backups diarios automáticos. Acceso solo con usuario y contraseña.</div>
-    </div>
-    <div class="dif" style="background:#EEEDFE;">
-      <i class="ti ti-headset" style="color:#534AB7;"></i>
-      <div class="dif-titulo" style="color:#3C3489;">Soporte directo</div>
-      <div class="dif-desc" style="color:#534AB7;">Atención personalizada por WhatsApp. Sin bots, sin esperas.</div>
-    </div>
-    <div class="dif" style="background:#FBEAF0;">
-      <i class="ti ti-refresh" style="color:#993556;"></i>
-      <div class="dif-titulo" style="color:#72243E;">Actualizaciones</div>
-      <div class="dif-desc" style="color:#993556;">Mejoras continuas incluidas en el plan mensual.</div>
-    </div>
+    <div class="dif"><i class="ti ti-bolt" style="color:#fbbf24;"></i><div class="dif-titulo">Listo para usar</div><div class="dif-desc">Sin configuraciones complejas. En horas ya estás operando.</div></div>
+    <div class="dif"><i class="ti ti-device-mobile" style="color:#34d399;"></i><div class="dif-titulo">100% responsive</div><div class="dif-desc">Funciona desde celular, tablet o PC sin instalar nada.</div></div>
+    <div class="dif"><i class="ti ti-shield-lock" style="color:#60a5fa;"></i><div class="dif-titulo">Datos seguros</div><div class="dif-desc">Backups diarios automáticos. Acceso con usuario y contraseña.</div></div>
+    <div class="dif"><i class="ti ti-headset" style="color:#a78bfa;"></i><div class="dif-titulo">Soporte directo</div><div class="dif-desc">Atención personalizada por WhatsApp. Sin bots, sin esperas.</div></div>
+    <div class="dif"><i class="ti ti-refresh" style="color:#fb7185;"></i><div class="dif-titulo">Actualizaciones</div><div class="dif-desc">Mejoras continuas incluidas en el plan mensual.</div></div>
   </div>
 
-  <!-- GARANTÍA -->
   <div class="garantia">
     <i class="ti ti-rosette-discount-check"></i>
     <div class="garantia-texto">
@@ -263,10 +262,7 @@
     <div class="plan">
       <div class="plan-badge">Modalidad Local</div>
       <div class="plan-nombre">En tu servidor</div>
-      <div class="precio-sistema">
-        <span class="num">$10</span>
-        <span class="label">/ mes</span>
-      </div>
+      <div class="precio-sistema"><span class="num">$10</span><span class="label">/ mes</span></div>
       <div class="precio-vpn"><i class="ti ti-check"></i> Hasta 10 VPN MikroTik incluidas</div>
       <div class="precio-instalacion"><i class="ti ti-tool" style="font-size:12px;"></i> Instalación y configuración: $50 único</div>
       <hr class="plan-divider"/>
@@ -280,10 +276,7 @@
     <div class="plan destacado">
       <div class="plan-badge">Modalidad Online</div>
       <div class="plan-nombre">En la nube</div>
-      <div class="precio-sistema">
-        <span class="num">$20</span>
-        <span class="label">/ mes</span>
-      </div>
+      <div class="precio-sistema"><span class="num">$20</span><span class="label">/ mes</span></div>
       <div class="precio-vpn"><i class="ti ti-check"></i> Hasta 10 VPN MikroTik incluidas</div>
       <div class="precio-instalacion"><i class="ti ti-tool" style="font-size:12px;"></i> Instalación y configuración: $50 único</div>
       <hr class="plan-divider"/>
@@ -296,9 +289,7 @@
     </div>
   </div>
 
-  <div class="nota-planes">
-    ¿Más de 10 routers MikroTik? Consultanos — tenemos tarifas especiales para redes más grandes.
-  </div>
+  <div class="nota-planes">¿Más de 10 routers MikroTik? Consultanos — tenemos tarifas especiales para redes más grandes.</div>
 
   <div class="footer">
     <div class="footer-demo">
