@@ -63,6 +63,11 @@
     .modulo ul li { font-size: 12px; color: #64748b; padding: 2px 0; line-height: 1.6; }
     .modulo ul li::before { content: "·  "; color: #0ea5e9; font-weight: 700; }
 
+    .novs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; margin-bottom: 1.75rem; }
+    .nov { display: flex; gap: 12px; align-items: flex-start; padding: 0.85rem 1rem; border-radius: 12px; background: rgba(14,165,233,0.06); border: 1px solid rgba(14,165,233,0.16); }
+    .nov i { font-size: 20px; color: #38bdf8; flex-shrink: 0; margin-top: 1px; }
+    .nov-titulo { font-size: 13px; font-weight: 500; color: #e2e8f0; margin-bottom: 2px; }
+    .nov-desc { font-size: 11.5px; line-height: 1.55; color: #64748b; }
     .difs { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1.75rem; }
     .dif { border-radius: 12px; padding: 1.1rem; text-align: center; border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); }
     .dif i { font-size: 26px; margin-bottom: 7px; display: block; }
@@ -114,7 +119,7 @@
     @media print {
       body { background: white; color: #1e293b; }
       body::before, .orb { display: none; }
-      .modulo, .intro, .plan, .dif { background: #f8fafc !important; border-color: #e2e8f0 !important; }
+      .modulo, .intro, .plan, .dif, .nov { background: #f8fafc !important; border-color: #e2e8f0 !important; }
       @page { margin: 1.5cm; size: A4; }
     }
   </style>
@@ -142,7 +147,7 @@
     <div class="header-text" style="position:relative;z-index:1;">
       <h1>eISP</h1>
       <div class="tagline">Sistema completo de gestión para proveedores de internet</div>
-      <div class="sub">Cobros · MikroTik · WhatsApp · Soporte · Contabilidad · Inventario · PWA · 2FA · Huella</div>
+      <div class="sub">Cobros · MikroTik · Fibra óptica · WhatsApp · Contabilidad · PWA · 2FA</div>
     </div>
   </div>
 
@@ -177,7 +182,17 @@
   </svg>
 
   <div class="intro">
-    <strong>eISP</strong> es un sistema de gestión diseñado específicamente para <strong>micro y medianos ISP</strong>. Desarrollado por alguien que operó su propio ISP, integra en una sola plataforma todo lo que necesitas: control de clientes, cobros, integración directa con MikroTik, notificaciones por WhatsApp, soporte técnico, inventario de materiales y contabilidad básica. <strong>Multi-usuario con roles diferenciados — admin, técnico y socio.</strong>
+    <strong>eISP</strong> es un sistema de gestión diseñado específicamente para <strong>micro y medianos ISP</strong>. Desarrollado por alguien que operó su propio ISP, integra en una sola plataforma todo lo que necesitas: clientes, cobros, MikroTik, fibra óptica, WhatsApp, soporte técnico, inventario y contabilidad. <strong>Multi-usuario con roles diferenciados: admin, técnico y operador.</strong>
+  </div>
+
+  <div class="seccion-titulo">Lo más reciente</div>
+  <div class="novs">
+    <div class="nov"><i class="ti ti-credit-card"></i><div><div class="nov-titulo">Prepago y postpago</div><div class="nov-desc">Cada cliente con su modalidad, en la misma instalación.</div></div></div>
+    <div class="nov"><i class="ti ti-wallet"></i><div><div class="nov-titulo">Saldo a favor</div><div class="nov-desc">Si un cliente paga de más, queda como crédito para su próxima factura.</div></div></div>
+    <div class="nov"><i class="ti ti-shield-check"></i><div><div class="nov-titulo">Auditoría de efectivo</div><div class="nov-desc">Detecta retiros de banco que nadie registró.</div></div></div>
+    <div class="nov"><i class="ti ti-map-pin"></i><div><div class="nov-titulo">Mapa en vivo</div><div class="nov-desc">Pines por estado; en rojo, el cliente de fibra desconectado.</div></div></div>
+    <div class="nov"><i class="ti ti-wifi"></i><div><div class="nov-titulo">Clave WiFi desde la OLT</div><div class="nov-desc">Cambia la clave en la ONU del cliente, sin visita técnica (OLT VSOL).</div></div></div>
+    <div class="nov"><i class="ti ti-qrcode"></i><div><div class="nov-titulo">Boletas y certificados con QR</div><div class="nov-desc">Documentos con código QR para verificarlos en línea.</div></div></div>
   </div>
 
   <div class="seccion-titulo">Módulos incluidos</div>
@@ -187,70 +202,77 @@
         <div class="modulo-icon" style="background:rgba(24,95,165,0.2);"><i class="ti ti-users" style="font-size:18px;color:#60a5fa;"></i></div>
         <div class="modulo-nombre">Clientes</div>
       </div>
-      <ul><li>Ficha completa con estado y plan</li><li>IP estática y PPPoE</li><li>GPS y mapa de ubicación</li><li>Cuenta IPTV integrada</li><li>Historial de suspensiones</li></ul>
+      <ul><li>Ficha con estado y plan</li><li>IP estática y PPPoE</li><li>GPS y mapa de ubicación</li><li>Cuenta IPTV integrada</li></ul>
     </div>
     <div class="modulo">
       <div class="modulo-header">
         <div class="modulo-icon" style="background:rgba(59,109,17,0.2);"><i class="ti ti-cash" style="font-size:18px;color:#86efac;"></i></div>
         <div class="modulo-nombre">Cobros y mora</div>
       </div>
-      <ul><li>Facturación mensual automática</li><li>Pago individual y múltiple</li><li>Pre-aviso y corte por mora</li><li>Comprobante por WhatsApp</li><li>Control de depósitos bancarios</li></ul>
+      <ul><li>Facturación mensual automática</li><li>Pago individual y múltiple</li><li>Pre-aviso y corte por mora</li><li>Control de depósitos bancarios</li></ul>
     </div>
     <div class="modulo">
       <div class="modulo-header">
         <div class="modulo-icon" style="background:rgba(153,60,29,0.2);"><i class="ti ti-router" style="font-size:18px;color:#fca5a5;"></i></div>
         <div class="modulo-nombre">MikroTik</div>
       </div>
-      <ul><li>Suspensión y activación automática</li><li>Crear PPPoE secrets y Simple Queues</li><li>Monitor en tiempo real (CPU, RAM)</li><li>Histograma de tráfico por puerto</li><li>Backup y restore remoto vía SSH</li></ul>
+      <ul><li>Suspensión y activación automática</li><li>PPPoE y Simple Queues</li><li>Monitor y alertas de routers offline</li><li>Backup y restore remoto</li></ul>
+    </div>
+    <div class="modulo">
+      <div class="modulo-header">
+        <div class="modulo-icon" style="background:rgba(34,211,238,0.18);"><i class="ti ti-network" style="font-size:18px;color:#67e8f9;"></i></div>
+        <div class="modulo-nombre">Fibra óptica</div>
+      </div>
+      <ul><li>Cajas NAP y puertos por cliente</li><li>Mapa con cajas y centrales</li><li>Zonas con ubicación GPS</li><li>Exporta KML para Google Earth</li></ul>
     </div>
     <div class="modulo">
       <div class="modulo-header">
         <div class="modulo-icon" style="background:rgba(15,110,86,0.2);"><i class="ti ti-brand-whatsapp" style="font-size:18px;color:#4ade80;"></i></div>
         <div class="modulo-nombre">WhatsApp</div>
       </div>
-      <ul><li>Notificaciones automáticas de cobro</li><li>Avisos de mora y corte</li><li>Bot con menú de consultas</li><li>Envío de contraseña WiFi</li><li>Alertas de routers offline</li></ul>
+      <ul><li>Avisos de cobro, mora y corte</li><li>Comprobante de pago</li><li>Bot: deuda, QR de pago y clave WiFi</li><li>Envío masivo escalonado</li></ul>
     </div>
     <div class="modulo">
       <div class="modulo-header">
         <div class="modulo-icon" style="background:rgba(133,79,11,0.2);"><i class="ti ti-headset" style="font-size:18px;color:#fcd34d;"></i></div>
         <div class="modulo-nombre">Soporte técnico</div>
       </div>
-      <ul><li>Tickets con prioridad y estados</li><li>Historial de atención por cliente</li><li>App para técnicos en campo (PEX)</li><li>Caja chica del técnico</li><li>Mapa KML para Google Earth</li></ul>
+      <ul><li>Tickets con prioridad y estados</li><li>Historial de atención por cliente</li><li>App para técnicos en campo</li><li>Caja chica del técnico</li></ul>
     </div>
     <div class="modulo">
       <div class="modulo-header">
         <div class="modulo-icon" style="background:rgba(153,53,86,0.2);"><i class="ti ti-packages" style="font-size:18px;color:#f9a8d4;"></i></div>
         <div class="modulo-nombre">Inventario</div>
       </div>
-      <ul><li>Productos y stock en tiempo real</li><li>Entradas y salidas con motivo</li><li>Materiales usados por ticket</li><li>Alertas de stock mínimo</li><li>Reportes de movimientos</li></ul>
+      <ul><li>Productos y stock en tiempo real</li><li>Entradas y salidas con motivo</li><li>Materiales usados por ticket</li><li>Alertas de stock mínimo</li></ul>
     </div>
     <div class="modulo">
       <div class="modulo-header">
         <div class="modulo-icon" style="background:rgba(83,74,183,0.2);"><i class="ti ti-chart-bar" style="font-size:18px;color:#a5b4fc;"></i></div>
         <div class="modulo-nombre">Finanzas y reportes</div>
       </div>
-      <ul><li>Libro diario de doble partida</li><li>Estado de resultados mensual</li><li>Reportes exportables Excel y PDF</li><li>Control de gastos personales</li><li>Panel financiero con KPIs</li></ul>
-    </div>
-    <div class="modulo">
-      <div class="modulo-header">
-        <div class="modulo-icon" style="background:rgba(95,94,90,0.2);"><i class="ti ti-users-group" style="font-size:18px;color:#cbd5e1;"></i></div>
-        <div class="modulo-nombre">Multi-usuario</div>
-      </div>
-      <ul><li>Roles: admin, técnico y operador</li><li>Acceso diferenciado por módulo</li><li>Gestión de empleados y cargos</li><li>Zonas y líneas de cobertura</li><li>App para técnicos en campo</li></ul>
-    </div>
-    <div class="modulo">
-      <div class="modulo-header">
-        <div class="modulo-icon" style="background:rgba(14,165,233,0.2);"><i class="ti ti-shield-lock" style="font-size:18px;color:#7dd3fc;"></i></div>
-        <div class="modulo-nombre">Seguridad</div>
-      </div>
-      <ul><li>2FA por WhatsApp en cada acceso</li><li>Login con huella / Face ID (passkey)</li><li>Sesión única por usuario</li><li>Roles y permisos por módulo</li><li>HTTPS + cifrado de credenciales</li></ul>
+      <ul><li>Libro diario y Libro Mayor</li><li>Estado de resultados mensual</li><li>Préstamos, socios y dividendos</li><li>Reportes en Excel y PDF</li></ul>
     </div>
     <div class="modulo">
       <div class="modulo-header">
         <div class="modulo-icon" style="background:rgba(99,102,241,0.2);"><i class="ti ti-calendar-repeat" style="font-size:18px;color:#a5b4fc;"></i></div>
         <div class="modulo-nombre">Gastos programados</div>
       </div>
-      <ul><li>Registra gastos recurrentes mensuales</li><li>Cuotas de crédito con desglose</li><li>Asiento contable automático al pagar</li><li>Semáforo pagado / pendiente</li><li>Control de vencimientos por día</li></ul>
+      <ul><li>Gastos recurrentes mensuales</li><li>Cuotas de crédito con desglose</li><li>Asiento contable automático</li><li>Semáforo pagado / pendiente</li></ul>
+    </div>
+    <div class="modulo">
+      <div class="modulo-header">
+        <div class="modulo-icon" style="background:rgba(95,94,90,0.2);"><i class="ti ti-users-group" style="font-size:18px;color:#cbd5e1;"></i></div>
+        <div class="modulo-nombre">Multi-usuario</div>
+      </div>
+      <ul><li>Roles: admin, técnico y operador</li><li>Acceso diferenciado por módulo</li><li>Gestión de empleados y cargos</li><li>Zonas y líneas de cobertura</li></ul>
+    </div>
+    <div class="modulo">
+      <div class="modulo-header">
+        <div class="modulo-icon" style="background:rgba(14,165,233,0.2);"><i class="ti ti-shield-lock" style="font-size:18px;color:#7dd3fc;"></i></div>
+        <div class="modulo-nombre">Seguridad</div>
+      </div>
+      <ul><li>2FA por WhatsApp en cada acceso</li><li>Huella / Face ID (passkey)</li><li>Sesión única por usuario</li><li>HTTPS y credenciales cifradas</li></ul>
     </div>
   </div>
 
@@ -259,7 +281,7 @@
     <div class="dif"><i class="ti ti-bolt" style="color:#fbbf24;"></i><div class="dif-titulo">Listo para usar</div><div class="dif-desc">Sin configuraciones complejas. En horas ya estás operando.</div></div>
     <div class="dif"><i class="ti ti-device-mobile" style="color:#34d399;"></i><div class="dif-titulo">Instala como app</div><div class="dif-desc">PWA instalable en celular. Abre como app nativa, sin navegador.</div></div>
     <div class="dif"><i class="ti ti-shield-lock" style="color:#60a5fa;"></i><div class="dif-titulo">Acceso seguro</div><div class="dif-desc">2FA por WhatsApp + login con huella. Sin contraseñas expuestas.</div></div>
-    <div class="dif"><i class="ti ti-headset" style="color:#a78bfa;"></i><div class="dif-titulo">Soporte directo</div><div class="dif-desc">Atención personalizada por WhatsApp. Sin bots, sin esperas.</div></div>
+    <div class="dif"><i class="ti ti-headset" style="color:#a78bfa;"></i><div class="dif-titulo">Soporte directo</div><div class="dif-desc">Atención directa por WhatsApp con quien desarrolla el sistema.</div></div>
     <div class="dif"><i class="ti ti-refresh" style="color:#fb7185;"></i><div class="dif-titulo">Actualizaciones</div><div class="dif-desc">Mejoras continuas incluidas en el plan mensual.</div></div>
   </div>
 
